@@ -1,0 +1,25 @@
+{
+    "name": "sleep",
+    "version": "3.5.1",
+    "description": "SLEEF is a library that implements vectorized versions of C standard math functions",
+    "homepage": "https://github.com/shibatch/sleef",
+    "denpendencies": [
+        "OpenSSL",
+        "OpenMP",
+        "ssl",
+        "crypto",
+        "mpfr",
+        "m",
+        "gmp",
+        "rt",
+        "fftw3",
+        {
+          "name": "vcpkg-cmake",
+          "host": true
+        },
+        {
+          "name": "vcpkg-cmake-config",
+          "host": true
+        }
+    ]
+}

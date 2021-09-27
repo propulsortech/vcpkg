@@ -7,41 +7,6 @@ variables:
   osx-pool: 'PrOsx-2021-07-27'
 
 stages:
-- stage: FormatChecks
-  displayName: 'Formatting and Documentation Checks'
-  pool: $(windows-pool)
-  jobs:
-  - job:
-    workspace:
-      clean: resources
-    variables:
-    - name: VCPKG_DOWNLOADS
-      value: D:\downloads
-    - name: DiffFile
-      value: $(Build.ArtifactStagingDirectory)\format.diff
-    steps:
-    - task: Powershell@2
-      displayName: 'Generate Documentation'
-      inputs:
-        filePath: 'docs/regenerate.ps1'
-        arguments: '-VcpkgRoot . -WarningAction Stop'
-        pwsh: true
-    - script: .\bootstrap-vcpkg.bat
-      displayName: 'Bootstrap vcpkg'
-    - script: '.\vcpkg.exe format-manifest --all'
-      displayName: 'Format Manifests'
-    - task: Powershell@2
-      displayName: 'Create Diff'
-      inputs:
-        filePath: scripts/azure-pipelines/Create-PRDiff.ps1
-        arguments: '-DiffFile $(DiffFile)'
-        pwsh: true
-    - task: PublishBuildArtifacts@1
-      condition: failed()
-      displayName: 'Publish Format and Documentation Diff'
-      inputs:
-        PathtoPublish: '$(DiffFile)'
-        ArtifactName: 'format.diff'
 - stage: RunPrTests
   displayName: 'Run PR Tests:'
   dependsOn: FormatChecks

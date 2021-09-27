@@ -46,9 +46,9 @@ Param(
     $ArchivesRoot = $null,
     [Parameter(ParameterSetName='BinarySourceStub')]
     $BinarySourceStub = $null,
-    $BuildReason = $null,
-    [switch]
-    $PassingIsPassing = $false
+    [String]$BuildReason = $null,
+    [String[]]$AdditionalSkips = @(),
+    [switch]$PassingIsPassing = $false
 )
 
 if (-Not ((Test-Path "triplets/$Triplet.cmake") -or (Test-Path "triplets/community/$Triplet.cmake"))) {
@@ -124,7 +124,8 @@ if ($LASTEXITCODE -ne 0)
 $skipList = . "$PSScriptRoot/generate-skip-list.ps1" `
     -Triplet $Triplet `
     -BaselineFile "$PSScriptRoot/../ci.baseline.txt" `
-    -SkipFailures:$skipFailures
+    -SkipFailures:$skipFailures `
+    -AdditionalSkips $AdditionalSkips
 
 if ($Triplet -in @('x64-windows', 'x64-osx', 'x64-linux'))
 {

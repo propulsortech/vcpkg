@@ -13,7 +13,7 @@ parameters:
     - 'ExtraPorts' # only tensorflow
 - name: jobName
   type: string
-  default: x64-osx
+  default: x64_osx
 
 jobs:
 - job: "${{ parameters.jobName }}"

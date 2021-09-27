@@ -64,7 +64,7 @@ stages:
       parameters:
         poolName: $(osx-pool)
         mode: ExtraPorts
-        jobName: x64-osx-tensorflow
+        jobName: x64_osx_tensorflow
 
   - template: linux/azure-pipelines.yml
     parameters:

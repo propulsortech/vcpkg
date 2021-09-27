@@ -9,7 +9,6 @@ variables:
 stages:
 - stage: RunPrTests
   displayName: 'Run PR Tests:'
-  dependsOn: FormatChecks
   jobs:
   - template: windows/azure-pipelines.yml
     parameters:

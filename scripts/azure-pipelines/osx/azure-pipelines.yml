@@ -46,10 +46,10 @@ jobs:
       filePath: 'scripts/azure-pipelines/test-modified-ports.ps1'
       arguments: >
         -Triplet "x64-osx"
-        -BuildReason "${{ variables['Build.Reason'] }}"
+        -BuildReason "$(Build.Reason)"
         -BinarySourceStub "${{ variables.BINARY_SOURCE_STUB }}"
         -WorkingRoot "${{ variables.WORKING_ROOT }}"
-        -ArtifactStagingDirectory "${{ variables['Build.ArtifactStagingDirectory'] }}"
+        -ArtifactStagingDirectory "$(Build.ArtifactStagingDirectory)"
         -AdditionalSkips ${{ variables.AdditionalSkips }}
       pwsh: true
   - bash: |
@@ -112,10 +112,10 @@ jobs:
         filePath: 'scripts/azure-pipelines/test-modified-ports.ps1'
         arguments: >
           -Triplet "x64-osx"
-          -BuildReason "${{ variables['Build.Reason'] }}"
+          -BuildReason "$(Build.Reason)"
           -BinarySourceStub "${{ variables.BINARY_SOURCE_STUB }}"
           -WorkingRoot "${{ variables.WORKING_ROOT }}"
-          -ArtifactStagingDirectory "${{ variables['Build.ArtifactStagingDirectory'] }}"
+          -ArtifactStagingDirectory "$(Build.ArtifactStagingDirectory)"
           -TestOnly @('tensorflow', 'tensorflow-cc')
         pwsh: true
     - bash: |

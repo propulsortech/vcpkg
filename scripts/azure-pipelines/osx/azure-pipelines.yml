@@ -11,15 +11,12 @@ parameters:
     - 'AllPorts' # PR mode
     - 'CorePorts' # CI, excluding tensorflow
     - 'ExtraPorts' # only tensorflow
-variables:
-- name: Postfix
-  ${{ if eq(parameters.mode, 'ExtraPorts') }}:
-    value: "_tensorflow"
-  ${{ if ne(parameters.mode, 'ExtraPorts') }}:
-    value: ""
+- name: jobName
+  type: string
+  default: x64-osx
 
 jobs:
-- job: "x64_osx${{ variables.Postfix }}"
+- job: "${{ parameters.jobName }}"
   pool:
     name: ${{ parameters.poolName }}
   workspace:

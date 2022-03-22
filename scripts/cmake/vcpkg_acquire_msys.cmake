@@ -59,13 +59,10 @@ vcpkg_execute_required_process(
 # Mirror list from https://github.com/msys2/MSYS2-packages/blob/master/pacman-mirrors/mirrorlist.msys
 # Sourceforge is not used because it does not keep older package versions
 set(Z_VCPKG_ACQUIRE_MSYS_MIRRORS
-    "https://www2.futureware.at/~nickoe/msys2-mirror/"
-    "https://mirror.yandex.ru/mirrors/msys2/"
-    "https://mirrors.tuna.tsinghua.edu.cn/msys2/"
-    "https://mirrors.ustc.edu.cn/msys2/"
-    "https://mirror.bit.edu.cn/msys2/"
-    "https://mirror.selfnet.de/msys2/"
-    "https://mirrors.sjtug.sjtu.edu.cn/msys2/"
+    "https://mirror.umd.edu/msys2"
+    "https://ftp.osuosl.org/pub/msys2"
+    "https://mirror.clarkson.edu/msys2"
+    "https://mirror.jmu.edu/pub/msys2"
 )
 
 function(z_vcpkg_acquire_msys_download_package out_archive)

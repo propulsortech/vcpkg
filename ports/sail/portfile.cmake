@@ -1,16 +1,28 @@
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO HappySeaFox/sail
-    REF v0.9.0-rc1
-    SHA512 c9b04bdf92600c0b1d38e00b31ec28f841b76fa41c50524199665de3e97a74b2633b8e9dc4bce1820521245b9d3bf04788eb1b5de9e3516e421927205d09ac47
+    REF v0.9.0-rc2
+    SHA512 9cbf48b716ff13ff5d494166b6777c70f225c67842c00004706e00a8b411e5c59315c524865694c4698d661f7b675961df14ef0405b4a90d627107499587b544
     HEAD_REF master
 )
+
+# Enable selected codecs
+set(ONLY_CODECS "")
+
+foreach(CODEC avif bmp gif ico jpeg jpeg2000 pcx png qoi svg tga tiff wal webp xbm)
+    if (${CODEC} IN_LIST FEATURES)
+        list(APPEND ONLY_CODECS ${CODEC})
+    endif()
+endforeach()
+
+list(JOIN ONLY_CODECS "\;" ONLY_CODECS_ESCAPED)
 
 vcpkg_cmake_configure(
     SOURCE_PATH "${SOURCE_PATH}"
 
     OPTIONS
         -DSAIL_COMBINE_CODECS=ON
+        -DSAIL_ONLY_CODECS=${ONLY_CODECS_ESCAPED}
         -DSAIL_BUILD_APPS=OFF
         -DSAIL_BUILD_EXAMPLES=OFF
         -DSAIL_BUILD_TESTS=OFF

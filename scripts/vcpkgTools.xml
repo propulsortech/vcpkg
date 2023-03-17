@@ -1,18 +1,16 @@
 <?xml version="1.0"?>
 <tools version="2">
     <tool name="python3" os="windows">
-        <version>3.10.7</version>
-        <exeRelativePath>python.exe</exeRelativePath>
-        <url>https://www.python.org/ftp/python/3.10.7/python-3.10.7-embed-win32.zip</url>
-        <sha512>a69445906a909ce5f2554c544fe4251a8ab9c5028b531975b8c78fa8e98295b2bf06e1840f346a3c0edf485a7792c40c9d318bffd36b9c7829ac72b7cf8697bc</sha512>
-        <archiveName>python-3.10.7-embed-win32.zip</archiveName>
+        <version>3.9.7</version>
+        <exeRelativePath></exeRelativePath>
+        <url></url>
+        <sha512></sha512>
     </tool>
     <tool name="python3_with_venv" os="windows">
-        <version>3.10.7</version>
-        <exeRelativePath>tools\python.exe</exeRelativePath>
-        <url>https://www.nuget.org/api/v2/package/python/3.10.7</url>
-        <sha512>dc763c4f3e9594619173a99740a6b54686c768c240efe316d4d3f8914383bd06420c0802781baf983ea840c49412b8330c1af93f31d2c73eb0ea22a55e71aa13</sha512>
-        <archiveName>python-3.10.7.nupkg.zip</archiveName>
+        <version>3.9.7</version>
+        <exeRelativePath></exeRelativePath>
+        <url></url>
+        <sha512></sha512>
     </tool>
     <tool name="cmake" os="windows">
         <version>3.24.1</version>
@@ -44,10 +42,9 @@
     </tool>
     <tool name="git" os="windows">
         <version>2.7.4</version>
-        <exeRelativePath>mingw32\bin\git.exe</exeRelativePath>
-        <url>https://github.com/git-for-windows/git/releases/download/v2.35.1.windows.2/PortableGit-2.35.1.2-32-bit.7z.exe</url>
-        <sha512>f98df16641a615bbc36c5c319c78abb780d824ff35ed5f2a095e2d5fce2acacfc7f6532c96f1c81d3d3cd8a642858cbd9de0e0e5fcde9ca11e6ad9f6598bb82f</sha512>
-        <archiveName>PortableGit-2.35.1.2-32-bit.7z.exe</archiveName>
+        <exeRelativePath></exeRelativePath>
+        <url></url>
+        <sha512></sha512>
     </tool>
     <tool name="git" os="linux">
         <version>2.7.4</version>

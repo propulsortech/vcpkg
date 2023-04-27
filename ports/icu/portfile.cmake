@@ -37,6 +37,11 @@ list(APPEND CONFIGURE_OPTIONS_DEBUG  --enable-debug --disable-release)
 set(RELEASE_TRIPLET ${TARGET_TRIPLET}-rel)
 set(DEBUG_TRIPLET ${TARGET_TRIPLET}-dbg)
 
+if("tools" IN_LIST FEATURES)
+  list(APPEND CONFIGURE_OPTIONS --enable-tools)
+else()
+  list(APPEND CONFIGURE_OPTIONS --disable-tools)
+endif()
 if(CMAKE_HOST_WIN32 AND VCPKG_TARGET_IS_MINGW AND NOT HOST_TRIPLET MATCHES "mingw")
     # Assuming no cross compiling because the host (windows) pkgdata tool doesn't
     # use the '/' path separator when creating compiler commands for mingw bash.
@@ -80,8 +85,11 @@ if(VCPKG_TARGET_IS_OSX AND VCPKG_LIBRARY_LINKAGE STREQUAL "dynamic")
 
     message(STATUS "setting rpath prefix for macOS dynamic libraries")
 
+    if("tools" IN_LIST FEATURES)
+        set(LIBICUTU_RPATH "libicutu")
+    endif()
     # add ID_PREFIX to libicudata libicui18n libicuio libicutu libicuuc
-    foreach(LIB_NAME IN ITEMS libicudata libicui18n libicuio libicutu libicuuc)
+    foreach(LIB_NAME IN ITEMS libicudata libicui18n libicuio ${LIBICUTU_RPATH} libicuuc)
         vcpkg_execute_build_process(
             COMMAND "${INSTALL_NAME_TOOL}" -id "${ID_PREFIX}/${LIB_NAME}.${ICU_VERSION_MAJOR}.dylib"
             "${LIB_NAME}.${VERSION}.dylib"
@@ -153,7 +161,7 @@ if(VCPKG_LIBRARY_LINKAGE STREQUAL "static")
 endif()
 
 # Install executables from /tools/icu/sbin to /tools/icu/bin on unix (/bin because icu require this for cross compiling)
-if(VCPKG_TARGET_IS_LINUX OR VCPKG_TARGET_IS_OSX)
+if(VCPKG_TARGET_IS_LINUX OR VCPKG_TARGET_IS_OSX AND "tools" IN_LIST FEATURES)
     vcpkg_copy_tools(
         TOOL_NAMES icupkg gennorm2 gencmn genccode gensprep
         SEARCH_DIR "${CURRENT_PACKAGES_DIR}/tools/icu/sbin"

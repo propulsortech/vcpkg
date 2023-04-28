@@ -1,11 +1,16 @@
-# Mirror list from https://github.com/msys2/MSYS2-packages/blob/master/pacman-mirrors/mirrorlist.msys
-# Sourceforge is not used because it does not keep older package versions
-set(Z_VCPKG_ACQUIRE_MSYS_MIRRORS
-    "https://mirror.umd.edu/msys2"
-    "https://ftp.osuosl.org/pub/msys2"
-    "https://mirror.clarkson.edu/msys2"
-    "https://mirror.jmu.edu/pub/msys2"
-)
+if(DEFINED ENV{VCPKG_MSYS_MIRRORS})
+  set(Z_VCPKG_ACQUIRE_MSYS_MIRRORS $ENV{VCPKG_MSYS_MIRRORS})
+else()
+  # Mirror list from https://github.com/msys2/MSYS2-packages/blob/master/pacman-mirrors/mirrorlist.msys
+  # Sourceforge is not used because it does not keep older package versions
+  set(Z_VCPKG_ACQUIRE_MSYS_MIRRORS
+      "file:///d:/vcpkg/msys2-cache/"
+      "https://mirror.umd.edu/msys2/"
+      "https://ftp.osuosl.org/pub/msys2/"
+      "https://mirror.clarkson.edu/msys2/"
+      "https://mirror.jmu.edu/pub/msys2/"
+  )
+endif()
 
 function(z_vcpkg_acquire_msys_download_package out_archive)
     cmake_parse_arguments(PARSE_ARGV 1 "arg" "" "URL;SHA512;FILENAME" "")
@@ -13,7 +18,11 @@ function(z_vcpkg_acquire_msys_download_package out_archive)
         message(FATAL_ERROR "internal error: z_vcpkg_acquire_msys_download_package passed extra args: ${arg_UNPARSED_ARGUMENTS}")
     endif()
 
-    set(all_urls "${arg_URL}")
+    if(DEFINED ENV{VCPKG_MSYS_MIRRORS})
+      set(all_urls "")
+    else()
+      set(all_urls "${arg_URL}")
+    endif()
 
     foreach(mirror IN LISTS Z_VCPKG_ACQUIRE_MSYS_MIRRORS)
         string(REPLACE "https://repo.msys2.org/" "${mirror}" mirror_url "${arg_URL}")

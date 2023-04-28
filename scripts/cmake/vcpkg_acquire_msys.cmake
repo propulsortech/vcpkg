@@ -1,11 +1,16 @@
-# Mirror list from https://github.com/msys2/MSYS2-packages/blob/master/pacman-mirrors/mirrorlist.msys
-# Sourceforge is not used because it does not keep older package versions
-set(Z_VCPKG_ACQUIRE_MSYS_MIRRORS
-    "https://mirror.umd.edu/msys2"
-    "https://ftp.osuosl.org/pub/msys2"
-    "https://mirror.clarkson.edu/msys2"
-    "https://mirror.jmu.edu/pub/msys2"
-)
+if(DEFINED ENV{VCPKG_MSYS_MIRRORS})
+  set(Z_VCPKG_ACQUIRE_MSYS_MIRRORS $ENV{VCPKG_MSYS_MIRRORS})
+else()
+  # Mirror list from https://github.com/msys2/MSYS2-packages/blob/master/pacman-mirrors/mirrorlist.msys
+  # Sourceforge is not used because it does not keep older package versions
+  set(Z_VCPKG_ACQUIRE_MSYS_MIRRORS
+      "file:///d:/vcpkg/msys2-cache/"
+      "https://mirror.umd.edu/msys2/"
+      "https://ftp.osuosl.org/pub/msys2/"
+      "https://mirror.clarkson.edu/msys2/"
+      "https://mirror.jmu.edu/pub/msys2/"
+  )
+endif()
 
 function(z_vcpkg_acquire_msys_download_package out_archive)
     cmake_parse_arguments(PARSE_ARGV 1 "arg" "" "URL;SHA512;FILENAME" "")
@@ -13,7 +18,11 @@ function(z_vcpkg_acquire_msys_download_package out_archive)
         message(FATAL_ERROR "internal error: z_vcpkg_acquire_msys_download_package passed extra args: ${arg_UNPARSED_ARGUMENTS}")
     endif()
 
-    set(all_urls "${arg_URL}")
+    if(DEFINED ENV{VCPKG_MSYS_MIRRORS})
+      set(all_urls "")
+    else()
+      set(all_urls "${arg_URL}")
+    endif()
 
     foreach(mirror IN LISTS Z_VCPKG_ACQUIRE_MSYS_MIRRORS)
         string(REPLACE "https://repo.msys2.org/" "${mirror}" mirror_url "${arg_URL}")
@@ -340,8 +349,8 @@ function(vcpkg_acquire_msys out_msys_root)
         DEPS msys2-runtime
     )
     z_vcpkg_acquire_msys_declare_package(
-        URL "https://repo.msys2.org/msys/x86_64/msys2-runtime-3.2.0-8-x86_64.pkg.tar.zst"
-        SHA512 fdd86f4ffa6e274d6fef1676a4987971b1f2e1ec556eee947adcb4240dc562180afc4914c2bdecba284012967d3d3cf4d1a392f798a3b32a3668d6678a86e8d3
+        URL "https://repo.msys2.org/msys/x86_64/msys2-runtime-3.4.6-1-x86_64.pkg.tar.zst"
+        SHA512 fbdcf2572d242b14ef3b39f29a6119ee58705bad651c9da48ffd11e80637e8d767d20ed5d562f67d92eecd01f7fc3bc351af9d4f84fb9b321d2a9aff858b3619
     )
     z_vcpkg_acquire_msys_declare_package(
         URL "https://repo.msys2.org/msys/x86_64/which-2.21-4-x86_64.pkg.tar.zst"

@@ -183,7 +183,7 @@
         <version>7.3.11</version>
         <exeRelativePath>pwsh.exe</exeRelativePath>
         <url>https://github.com/PowerShell/PowerShell/releases/download/v7.3.11/PowerShell-7.3.11-win-x86.zip</url>
-        <sha512>bc1c8816f2942a77e965f3deb1b00c3c771105e58637c0084e885e62f7a99137c71ffdbc528ceb1e0fd4380987a35d5d474108f7cb8108b4115494207b5cb0ec</sha512>
+        <sha512>951fb62eabdf4005fc02bbd65ef94087d569fa30729004cdbfc8c6e9f8ed92c07bf9391a04438c5c907028eb72d2987305a23ef8842fea0f7419842c0f793e86</sha512>
         <archiveName>PowerShell-7.3.11-win-x86.zip</archiveName>
     </tool>
     <tool name="node" os="windows">

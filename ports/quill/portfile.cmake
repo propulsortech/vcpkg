@@ -4,7 +4,7 @@ vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO odygrd/quill
     REF v${VERSION}
-    SHA512 65aa38c0c279916b6a861587834deff393fd2d7bdbcdc9b91de922a72e90d813581db20a822d47c3c4ee2c46da09a10ed4020d06fc2bf456c54e1469f3ce66ef
+    SHA512 ac5d0432fb8bdf074906f5858f1e795f2e4cb9b28a9e2cb5f16c5ddc172bdd6676880a1ab4f0ab073ba5b24fb76a37020c8ff3a58ece462cd8dfd4676122a4ee
     HEAD_REF master
 )
 

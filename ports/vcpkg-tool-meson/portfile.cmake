@@ -9,7 +9,7 @@ set(patches
   adjust-python-dep.patch
   adjust-args.patch
   remove-freebsd-pcfile-specialization.patch
-  meson-1.4-llvm-18.diff
+  fix-libcpp-enable-assertions.patch # https://github.com/mesonbuild/meson/pull/14548, Remove in 1.8.3
 )
 set(scripts
   vcpkg-port-config.cmake

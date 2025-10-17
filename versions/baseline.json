@@ -2898,7 +2898,7 @@
     },
     "ffmpeg": {
       "baseline": "7.1.2",
-      "port-version": 0
+      "port-version": 1
     },
     "ffnvcodec": {
       "baseline": "12.2.72.0",
@@ -4518,6 +4518,10 @@
     },
     "lexbor": {
       "baseline": "2.5.0",
+      "port-version": 0
+    },
+    "lexilla": {
+      "baseline": "5.4.5",
       "port-version": 0
     },
     "lfreist-hwinfo": {
@@ -8829,7 +8833,7 @@
       "port-version": 0
     },
     "sentry-native": {
-      "baseline": "0.11.2",
+      "baseline": "0.11.3",
       "port-version": 0
     },
     "septag-dmon": {
@@ -9133,7 +9137,7 @@
       "port-version": 1
     },
     "spdlog": {
-      "baseline": "1.15.3",
+      "baseline": "1.16.0",
       "port-version": 0
     },
     "spectra": {
@@ -9452,6 +9456,10 @@
       "baseline": "7.0.0",
       "port-version": 0
     },
+    "sushant-wayal-stringhash": {
+      "baseline": "1.1.0",
+      "port-version": 0
+    },
     "svt-av1": {
       "baseline": "3.1.2",
       "port-version": 0
@@ -9628,6 +9636,10 @@
       "baseline": "2018-10-25",
       "port-version": 2
     },
+    "tiny-optional": {
+      "baseline": "1.5.2",
+      "port-version": 0
+    },
     "tiny-process-library": {
       "baseline": "2.0.4",
       "port-version": 3
@@ -9770,7 +9782,7 @@
     },
     "torch-th": {
       "baseline": "2019-04-19",
-      "port-version": 5
+      "port-version": 6
     },
     "tracy": {
       "baseline": "0.11.1",

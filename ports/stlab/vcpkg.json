@@ -1,6 +1,6 @@
 {
   "name": "stlab",
-  "version": "1.7.1",
+  "version": "2.0.2",
   "port-version": 1,
   "description": [
     "stlab is the ongoing work of what was Adobe Software Technology Lab.",
@@ -9,6 +9,7 @@
   "homepage": "https://github.com/stlab/libraries",
   "license": "BSL-1.0",
   "dependencies": [
+    "stlab-copy-on-write",
     {
       "name": "vcpkg-cmake",
       "host": true
@@ -17,17 +18,5 @@
       "name": "vcpkg-cmake-config",
       "host": true
     }
-  ],
-  "default-features": [
-    "cpp17shims"
-  ],
-  "features": {
-    "cpp17shims": {
-      "description": "Support C++11/14 by polyfilling stlab's use of `optional` and `variant` with boost. On by default.",
-      "dependencies": [
-        "boost-optional",
-        "boost-variant"
-      ]
-    }
-  }
+  ]
 }

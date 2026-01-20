@@ -1,21 +1,28 @@
-vcpkg_from_gitlab(
-    GITLAB_URL https://gitlab.gnome.org
-    OUT_SOURCE_PATH SOURCE_PATH
-    REPO GNOME/libsoup
-    REF "${VERSION}"
-    SHA512 "780d360167af1c7b5497d79c6752f3fb917b552928f7e1af6476e2713285426de7803fc28d1b76c541d5246a404772abd0f412acc953d6a1441e632416f72f94"
-    HEAD_REF main
+string(REGEX MATCH [[^[0-9][0-9]*\.[1-9][0-9]*]] VERSION_MAJOR_MINOR ${VERSION})
+vcpkg_download_distfile(ARCHIVE
+    URLS
+        "https://download.gnome.org/sources/${PORT}/${VERSION_MAJOR_MINOR}/${PORT}-${VERSION}.tar.xz"
+        "https://www.mirrorservice.org/sites/ftp.gnome.org/pub/GNOME/sources/${PORT}/${VERSION_MAJOR_MINOR}/${PORT}-${VERSION}.tar.xz"
+    FILENAME "GNOME-${PORT}-${VERSION}.tar.xz"
+    SHA512 cb44d93b16048d31ae04a8c2416bbe233e0e9bdaf2d9bfe2879260fd3da27e90a0bb05cddbd82cdf81a4a778bd451ad172a14dd31e2fd113c3bbbe13c0029b03
 )
+
+vcpkg_extract_source_archive(SOURCE_PATH ARCHIVE "${ARCHIVE}")
 
 vcpkg_configure_meson(
     SOURCE_PATH "${SOURCE_PATH}"
     OPTIONS
-        -Dtls_check=false
-        -Ddocs=disabled
-        -Dtests=false
-        -Ddoc_tests=false
-        -Dkrb5_config=false
         -Dgssapi=disabled
+        -Dbrotli=disabled
+        -Dtls_check=false
+        -Dintrospection=disabled
+        -Dvapi=disabled
+        -Ddocs=disabled
+        -Ddoc_tests=false
+        -Dtests=false
+        -Dautobahn=disabled
+        -Dsysprof=disabled
+        -Dpkcs11_tests=disabled
     ADDITIONAL_BINARIES
         "gio-querymodules = '${CURRENT_HOST_INSTALLED_DIR}/tools/glib/gio-querymodules${CMAKE_EXECUTABLE_SUFFIX}'"
         "glib-compile-schemas = '${CURRENT_HOST_INSTALLED_DIR}/tools/glib/glib-compile-schemas${CMAKE_EXECUTABLE_SUFFIX}'"

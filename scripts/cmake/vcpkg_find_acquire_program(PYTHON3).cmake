@@ -1,6 +1,6 @@
 if(CMAKE_HOST_WIN32)
     set(program_name python)
-    set(program_version 3.11.8)
+    set(program_version 3.14.2)
     if(DEFINED ENV{PROCESSOR_ARCHITEW6432})
         set(build_arch $ENV{PROCESSOR_ARCHITEW6432})
     else()
@@ -8,23 +8,32 @@ if(CMAKE_HOST_WIN32)
     endif()
     if(build_arch MATCHES "^(ARM|arm)64$")
         set(tool_subdirectory "python-${program_version}-arm64")
+        # https://www.python.org/ftp/python/3.14.2/python-3.14.2-embed-arm64.zip
         set(download_urls "https://www.python.org/ftp/python/${program_version}/python-${program_version}-embed-arm64.zip")
         set(download_filename "python-${program_version}-embed-arm64.zip")
-        set(download_sha512 42b820e34c4a77fe928e0af395292d804dcbf7e1132cf353ce6ce23435a687ec580f03ccbf3cd94d98c9dc5ac951f8ca64dbd65cded7ef1d675a39d63f8ace8d)
+        set(download_sha512 410C785D1BC8F3D1352E5386E53AB0AEF39E1212680E2E05DAAD5672DCC749CCFAB96E204C84B3C1E9544002088E1412CA733B1A86CA4CC920549C41774F6C58)
     elseif(build_arch MATCHES "(amd|AMD)64")
         set(tool_subdirectory "python-${program_version}-x64")
+        # https://www.python.org/ftp/python/3.14.2/python-3.14.2-embed-amd64.zip
         set(download_urls "https://www.python.org/ftp/python/${program_version}/python-${program_version}-embed-amd64.zip")
         set(download_filename "python-${program_version}-embed-amd64.zip")
-        set(download_sha512 da5f01e94d3505eebdfd4d2e70d9cf494925199024479cc29ef144567906b2e8ad55a855b199a755318f5fb9a260f21b987a5fc85f31acf631af4b677921251d)
+        set(download_sha512 D72D4F036C4DD563C4AC15C7162BF63406D3FD83A44877300FF87E4168F211D66B8209FDD3AD39EA549B8BC46C092B4ECAB3B24B0DA2F8950E0E5642828E99F2)
     else()
         set(tool_subdirectory "python-${program_version}-x86")
+        # https://www.python.org/ftp/python/3.14.2/python-3.14.2-embed-win32.zip
         set(download_urls "https://www.python.org/ftp/python/${program_version}/python-${program_version}-embed-win32.zip")
         set(download_filename "python-${program_version}-embed-win32.zip")
-        set(download_sha512 c88ef02f0860000dbc59361cfe051e3e8dc7d208ed39bb5bc20a3e8b8711b578926e281a11941787ea61b2ef05b945ab3133322dcb85b916f79ac4ada57f6309)
+        set(download_sha512 05703133A3371493CCD3552DD12DB6385CBB1A34874056C8A3F26DDA6B813BF2BD535549C30AA4C0827287D9C4FF3250A49330282AD8535A06937B016D483010)
     endif()
 
+    # Remove this after the next update
+    string(APPEND tool_subdirectory "-1")
+
     set(paths_to_search "${DOWNLOADS}/tools/python/${tool_subdirectory}")
-    vcpkg_list(SET post_install_command "${CMAKE_COMMAND}" -E rm python311._pth)
+
+    vcpkg_list(SET post_install_command
+        "${CMAKE_COMMAND}" "-DPYTHON_DIR=${paths_to_search}" "-DPYTHON_VERSION=${program_version}" -P "${CMAKE_CURRENT_LIST_DIR}/z_vcpkg_make_python_less_embedded.cmake"
+    )
 else()
     set(program_name python3)
     set(brew_package_name "python")

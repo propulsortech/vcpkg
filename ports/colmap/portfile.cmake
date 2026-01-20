@@ -1,11 +1,14 @@
-set(COLMAP_REF "9c704e89ff0a80e797725e112011f9f69e5aa28f") # Oct 1, 2023
+# Update both, literally.
+set(COLMAP_REF 3.12.6 "4d5b60e19ad268072adaf1267d21fa38a9a828ca")
 
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO colmap/colmap
-    REF "${COLMAP_REF}"
-    SHA512 6ece735c403304c14887cd9b2b13a7e36bf07155fa959748c09d74854e0da6338766c11e6a371c26f983ccdb29f93b2600d685c907a5a137fe20d798b26805d8
+    REF "${VERSION}"
+    SHA512 718e4542a128fbe39dd36a5e2e6d013c201ef7e23d0f6f38acc10aa5f505185389d8c9b8a75f02846cac4fd426adb75250cc32d32d427496b275ad4632a05ddb
     HEAD_REF main
+    PATCHES
+        no-glu.diff
 )
 
 if (NOT TRIPLET_SYSTEM_ARCH STREQUAL "x64" AND ("cuda" IN_LIST FEATURES OR "cuda-redist" IN_LIST FEATURES))
@@ -15,14 +18,22 @@ endif()
 # set GIT_COMMIT_ID and GIT_COMMIT_DATE
 if(DEFINED VCPKG_HEAD_VERSION)
     set(GIT_COMMIT_ID "${VCPKG_HEAD_VERSION}")
+elseif(NOT VERSION IN_LIST COLMAP_REF)
+    message(FATAL_ERROR "Version ${VERSION} missing in COLMAP_REF (${COLMAP_REF})")
 else()
-    set(GIT_COMMIT_ID "${COLMAP_REF}")
+    list(GET COLMAP_REF 1 GIT_COMMIT_ID)
 endif()
 
 string(TIMESTAMP COLMAP_GIT_COMMIT_DATE "%Y-%m-%d")
 
+foreach(FEATURE ${FEATURE_OPTIONS})
+    message(STATUS "${FEATURE}")
+endforeach()
+
 set(CUDA_ENABLED OFF)
-set(TESTS_ENABLED OFF)
+set(GUI_ENABLED OFF)
+set(CGAL_ENABLED OFF)
+set(OPENMP_ENABLED ON)
 
 if("cuda" IN_LIST FEATURES)
     set(CUDA_ENABLED ON)
@@ -34,13 +45,16 @@ if("cuda-redist" IN_LIST FEATURES)
     set(CUDA_ARCHITECTURES "all-major")
 endif()
 
-if("tests" IN_LIST FEATURES)
-    set(TESTS_ENABLED ON)
+if("gui" IN_LIST FEATURES)
+    set(GUI_ENABLED ON)
 endif()
 
-set(OPENMP_ENABLED ON)
+if("cgal" IN_LIST FEATURES)
+    set(CGAL_ENABLED ON)
+endif()
+
 if (VCPKG_TARGET_IS_OSX AND VCPKG_TARGET_ARCHITECTURE MATCHES "arm")
-    set(OPENMP_ENABLED Off)
+    set(OPENMP_ENABLED OFF)
 endif()
 
 vcpkg_cmake_configure(
@@ -49,10 +63,14 @@ vcpkg_cmake_configure(
     OPTIONS
         -DCUDA_ENABLED=${CUDA_ENABLED}
         -DCMAKE_CUDA_ARCHITECTURES=${CUDA_ARCHITECTURES}
-        -DTESTS_ENABLED=${TESTS_ENABLED}
+        -DGUI_ENABLED=${GUI_ENABLED}
         -DGIT_COMMIT_ID=${GIT_COMMIT_ID}
         -DGIT_COMMIT_DATE=${COLMAP_GIT_COMMIT_DATE}
         -DOPENMP_ENABLED=${OPENMP_ENABLED}
+        -DCGAL_ENABLED=${CGAL_ENABLED}
+        -DTESTS_ENABLED=OFF
+        -DFETCH_POSELIB=OFF
+        -DFETCH_FAISS=OFF
 )
 
 vcpkg_cmake_install()
@@ -84,6 +102,6 @@ file(REMOVE_RECURSE
 
 vcpkg_copy_pdbs()
 
-file(INSTALL "${SOURCE_PATH}/COPYING.txt" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
+vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/COPYING.txt")
 
 file(INSTALL "${CMAKE_CURRENT_LIST_DIR}/usage" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}")

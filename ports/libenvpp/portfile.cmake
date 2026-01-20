@@ -1,14 +1,18 @@
 vcpkg_minimum_required(VERSION 2022-10-12) # for ${VERSION}
-vcpkg_check_linkage(ONLY_STATIC_LIBRARY)
+
+# No DLL export(yet)
+if(VCPKG_TARGET_IS_WINDOWS)
+    vcpkg_check_linkage(ONLY_STATIC_LIBRARY)
+endif()
+
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO ph3at/libenvpp
     REF v${VERSION}
-    SHA512 5e56404983770b6838d43311490cbd49ef68aad84868b3d9cb9dcb104d33e34eb3588d494bc120179c75c242a3bdc0c4e39c36f7fb732a37a843c1b79c22886f
+    SHA512 d7d11736884c4991f9d52818b306feb62c9783b69f7ee0f9aae90ff29aced297050c4140b6485e5687b0edc4cb11b58372c28039ad67fa780cc31f0da2f381f0
     HEAD_REF main
     PATCHES
         fix-dependencies.patch
-        fix-install.patch
 )
 
 vcpkg_cmake_configure(

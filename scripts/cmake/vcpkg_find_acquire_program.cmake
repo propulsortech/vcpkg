@@ -49,6 +49,7 @@ function(z_vcpkg_find_acquire_program_find_external program)
         unset(SCRIPT_${arg_PROGRAM_NAME} CACHE)
     endif()
 
+    set(${program} "$CACHE{${program}}")
     if("${version_command}" STREQUAL "")
         set(version_is_good ON) # can't check for the version being good, so assume it is
     elseif(${program}) # only do a version check if ${program} has a value
@@ -60,8 +61,10 @@ function(z_vcpkg_find_acquire_program_find_external program)
         )
     endif()
 
-    if(NOT version_is_good)
-        unset("${program}" PARENT_SCOPE)
+    if(version_is_good)
+        set(${program} "$CACHE{${program}}" PARENT_SCOPE)
+    else()
+        set("${program}" "${program}-NOTFOUND" PARENT_SCOPE)
         unset("${program}" CACHE)
     endif()
 endfunction()
@@ -92,6 +95,7 @@ function(z_vcpkg_find_acquire_program_find_internal program)
         endif()
         unset(SCRIPT_${program} CACHE)
     endif()
+    set(${program} "$CACHE{${program}}" PARENT_SCOPE)
 endfunction()
 
 function(vcpkg_find_acquire_program program)
@@ -138,6 +142,15 @@ function(vcpkg_find_acquire_program program)
 
     if("${search_names}" STREQUAL "")
         set(search_names "${program_name}")
+    endif()
+
+    # Force nested `find_program` to either use the cached variable or
+    # to actually search, regardless of a parent scope variable.
+    # Called functions must change the variable in this scope.
+    if("$CACHE{${program}}" STREQUAL "")
+        set(${program} "NOTFOUND")
+    else()
+        set(${program} "$CACHE{${program}}")
     endif()
 
     z_vcpkg_find_acquire_program_find_internal("${program}"
@@ -199,6 +212,15 @@ function(vcpkg_find_acquire_program program)
                         WORLD_READ WORLD_EXECUTE
                 )
             endif()
+        elseif(tool_subdirectory STREQUAL "")
+            # The effective tool subdir is owned by the extracted paths of the archive.
+            # *** This behavior is provided for convenience and short paths. ***
+            # There must be no overlap between different providers of subdirs.
+            # Otherwise tool_subdirectory must be used in order to separate extracted trees.
+            file(REMOVE_RECURSE "${full_subdirectory}.temp")
+            vcpkg_extract_archive(ARCHIVE "${archive_path}" DESTINATION "${full_subdirectory}.temp")
+            file(COPY "${full_subdirectory}.temp/" DESTINATION "${full_subdirectory}")
+            file(REMOVE_RECURSE "${full_subdirectory}.temp")
         else()
             vcpkg_extract_archive(ARCHIVE "${archive_path}" DESTINATION "${full_subdirectory}")
         endif()

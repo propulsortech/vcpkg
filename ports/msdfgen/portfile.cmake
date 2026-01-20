@@ -1,9 +1,8 @@
-
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO Chlumsky/msdfgen
-    REF v1.11
-    SHA512 b5223bbdbd7245e7a891914158a25ea1d570bbe1066ca6c016d1ddd469d5156690f83f91c78630b2b2efcc890de0b7e1c9e8963a67f9eb8f83c6d45284d5b08a
+    REF "v${VERSION}"
+    SHA512 4b2cad8d308f6c7d4730ef92f56c784277dd24eb94b3ba9e8db2080a96bbe789bfe12125403107cbac5c7a21c81b06a25a02fb59781273b178397fa3beed8989
     HEAD_REF master
 )
 
@@ -48,4 +47,4 @@ endif()
 file(REMOVE_RECURSE "${CURRENT_PACKAGES_DIR}/debug/include")
 
 # license
-file(INSTALL "${SOURCE_PATH}/LICENSE.txt" DESTINATION "${CURRENT_PACKAGES_DIR}/share/${PORT}" RENAME copyright)
+vcpkg_install_copyright(FILE_LIST "${SOURCE_PATH}/LICENSE.txt")

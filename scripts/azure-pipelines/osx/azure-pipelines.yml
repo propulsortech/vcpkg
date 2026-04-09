@@ -19,7 +19,8 @@ jobs:
 - job: ${{ parameters.jobName }}
   condition: and(succeeded(), contains('^${{ replace(parameters.jobName, '_', '-') }}$', '${{ parameters.tripletPattern }}'))
   pool:
-    name: PrOsx-2026-01-12-arm64
+    name: AcesShared
+    demands: ImageOverride -equals ACES_VM_SharedPool_Tahoe
   workspace:
     clean: resources
   timeoutInMinutes: 2880 # 2 days

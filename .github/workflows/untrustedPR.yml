@@ -52,7 +52,7 @@ jobs:
           # check for formatting mistakes by rerunning format-manifest and format-feature-baseline as appropriate
           git switch --detach "$incoming_branch_commit"
           git reset --hard "$incoming_branch_commit"
-          git clean -fd
+          git clean -fd -- ports
           ./vcpkg format-manifest --all --convert-control
           ./vcpkg format-feature-baseline scripts/ci.baseline.txt
           ./vcpkg format-feature-baseline scripts/ci.feature.baseline.txt

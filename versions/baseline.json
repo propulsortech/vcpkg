@@ -276,6 +276,10 @@
       "baseline": "14.4.1",
       "port-version": 1
     },
+    "arp1it-minecraft-server-status": {
+      "baseline": "1.0.1",
+      "port-version": 0
+    },
     "arpack-ng": {
       "baseline": "3.9.1",
       "port-version": 1

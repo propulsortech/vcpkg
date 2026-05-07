@@ -1482,7 +1482,7 @@
     },
     "brpc": {
       "baseline": "1.16.0",
-      "port-version": 0
+      "port-version": 1
     },
     "brunocodutra-metal": {
       "baseline": "2.1.4",
@@ -7222,7 +7222,7 @@
     },
     "offscale-libetcd-cpp": {
       "baseline": "2019-07-10",
-      "port-version": 3
+      "port-version": 4
     },
     "ogre": {
       "baseline": "14.5.2",
@@ -7966,7 +7966,7 @@
     },
     "protobuf": {
       "baseline": "6.33.4",
-      "port-version": 1
+      "port-version": 2
     },
     "protobuf-c": {
       "baseline": "1.5.2",

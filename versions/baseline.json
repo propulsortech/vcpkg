@@ -54,7 +54,7 @@
     },
     "adios2": {
       "baseline": "2.9.2",
-      "port-version": 0
+      "port-version": 1
     },
     "advobfuscator": {
       "baseline": "2.1.2",
@@ -266,7 +266,7 @@
     },
     "argumentum": {
       "baseline": "0.3.2",
-      "port-version": 0
+      "port-version": 1
     },
     "argus": {
       "baseline": "0.2.1",
@@ -1574,7 +1574,7 @@
     },
     "c9y": {
       "baseline": "0.8.0",
-      "port-version": 0
+      "port-version": 1
     },
     "cachelib": {
       "baseline": "2026.02.23.00",
@@ -1846,7 +1846,7 @@
     },
     "clockutils": {
       "baseline": "1.1.1",
-      "port-version": 4
+      "port-version": 5
     },
     "clrng": {
       "baseline": "2020-12-01",
@@ -2102,7 +2102,7 @@
     },
     "cppdap": {
       "baseline": "1.58.0-a",
-      "port-version": 0
+      "port-version": 1
     },
     "cppfs": {
       "baseline": "1.3.0",
@@ -2890,7 +2890,7 @@
     },
     "evpp": {
       "baseline": "0.7.0",
-      "port-version": 9
+      "port-version": 10
     },
     "exiv2": {
       "baseline": "0.28.8",
@@ -6154,7 +6154,7 @@
     },
     "lightgbm": {
       "baseline": "4.5.0",
-      "port-version": 0
+      "port-version": 1
     },
     "lightningscanner": {
       "baseline": "1.0.2",
@@ -6726,7 +6726,7 @@
     },
     "mnn": {
       "baseline": "1.1.0",
-      "port-version": 7
+      "port-version": 8
     },
     "modern-cpp-kafka": {
       "baseline": "2024.07.03",
@@ -6858,7 +6858,7 @@
     },
     "msgpack11": {
       "baseline": "0.0.10",
-      "port-version": 4
+      "port-version": 5
     },
     "msh3": {
       "baseline": "0.8.0",
@@ -7154,7 +7154,7 @@
     },
     "nmslib": {
       "baseline": "2.1.1",
-      "port-version": 3
+      "port-version": 4
     },
     "nng": {
       "baseline": "1.12.0",
@@ -8806,7 +8806,7 @@
     },
     "realsense2": {
       "baseline": "2.56.5",
-      "port-version": 0
+      "port-version": 1
     },
     "recastnavigation": {
       "baseline": "1.6.0",
@@ -9298,7 +9298,7 @@
     },
     "sf2cute": {
       "baseline": "0.2.0",
-      "port-version": 4
+      "port-version": 5
     },
     "sfcgal": {
       "baseline": "2.3.0",
@@ -10358,7 +10358,7 @@
     },
     "tomsolver": {
       "baseline": "1.0.1",
-      "port-version": 0
+      "port-version": 1
     },
     "toomanycooks": {
       "baseline": "1.5.0",
@@ -10422,7 +10422,7 @@
     },
     "triton": {
       "baseline": "2025-02-15",
-      "port-version": 0
+      "port-version": 1
     },
     "trompeloeil": {
       "baseline": "49",
@@ -10830,7 +10830,7 @@
     },
     "vowpal-wabbit": {
       "baseline": "9.11.2",
-      "port-version": 1
+      "port-version": 2
     },
     "vs-yasm": {
       "baseline": "0.5.0",
@@ -10870,7 +10870,7 @@
     },
     "vtk-m": {
       "baseline": "2.3.0",
-      "port-version": 1
+      "port-version": 2
     },
     "vulkan": {
       "baseline": "2023-12-17",
@@ -11314,7 +11314,7 @@
     },
     "yato": {
       "baseline": "2022-03-06",
-      "port-version": 0
+      "port-version": 1
     },
     "yoctolib": {
       "baseline": "2.1.12708",
@@ -11390,7 +11390,7 @@
     },
     "zlmediakit": {
       "baseline": "2024-09-29",
-      "port-version": 1
+      "port-version": 2
     },
     "zoe": {
       "baseline": "3.6",

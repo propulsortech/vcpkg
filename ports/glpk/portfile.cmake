@@ -14,6 +14,11 @@ vcpkg_extract_source_archive(
         configure.ac.patch
 )
 
+if(NOT VCPKG_TARGET_IS_WINDOWS)
+    string(APPEND VCPKG_C_FLAGS " -std=gnu17")
+    string(APPEND VCPKG_CXX_FLAGS "")
+endif()
+
 vcpkg_list(SET CONFIGURE_OPTIONS ac_cv_prog_cc_c23=no)
 if("dl" IN_LIST FEATURES)
     vcpkg_list(APPEND CONFIGURE_OPTIONS --enable-dl=dlfcn "LIBS=-ldl \$LIBS")

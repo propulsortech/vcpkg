@@ -89,6 +89,7 @@ vcpkg_cmake_configure(
     # Geogram cannot be built with ninja because it embeds $(Configuration) in some of the generated paths. These require MSBuild in order to be evaluated.
     WINDOWS_USE_MSBUILD
     OPTIONS
+        -DCMAKE_C_STANDARD=17
         -DVORPALINE_BUILD_DYNAMIC=${VORPALINE_BUILD_DYNAMIC}
         -DGEOGRAM_LIB_ONLY=ON
         -DGEOGRAM_USE_SYSTEM_GLFW3=ON

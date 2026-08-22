@@ -35,6 +35,8 @@ if(VCPKG_TARGET_IS_WINDOWS AND NOT VCPKG_TARGET_IS_MINGW)
 endif()
 
 if(NOT VCPKG_TARGET_IS_WINDOWS)
+    string(APPEND VCPKG_C_FLAGS " -std=gnu17")
+    string(APPEND VCPKG_CXX_FLAGS "")
     file(GLOB _py3_include_path "${CURRENT_HOST_INSTALLED_DIR}/include/python3*")
     string(REGEX MATCH "python3\\.([0-9]+)" _python_version_tmp "${_py3_include_path}")
     set(PYTHON_VERSION_MINOR "${CMAKE_MATCH_1}")

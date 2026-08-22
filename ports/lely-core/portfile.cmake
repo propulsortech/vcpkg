@@ -11,6 +11,11 @@ vcpkg_from_gitlab(
     HEAD_REF master
 )
 
+if(NOT VCPKG_TARGET_IS_WINDOWS)
+    string(APPEND VCPKG_C_FLAGS " -std=gnu17")
+    string(APPEND VCPKG_CXX_FLAGS "")
+endif()
+
 vcpkg_make_configure(
     SOURCE_PATH "${SOURCE_PATH}"
     AUTORECONF

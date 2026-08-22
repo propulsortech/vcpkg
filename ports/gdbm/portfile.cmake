@@ -13,6 +13,11 @@ vcpkg_extract_source_archive(
 
 vcpkg_list(SET options)
 
+if(NOT VCPKG_TARGET_IS_WINDOWS)
+    string(APPEND VCPKG_C_FLAGS " -std=gnu17")
+    string(APPEND VCPKG_CXX_FLAGS "")
+endif()
+
 if("libgdbm-compat" IN_LIST FEATURES)
     list(APPEND options "--enable-libgdbm-compat=yes")
 endif()
